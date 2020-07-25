@@ -4,6 +4,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Chip, Tooltip } from '@material-ui/core';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
+import webSocket from 'app/helpers/webSocket';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -31,6 +32,16 @@ const useStyles = makeStyles(theme => ({
 function Logo() {
 	const classes = useStyles();
 	const { isOnline } = useSelector(({ auth }) => auth.user);
+	const [init, setInit] = React.useState(false);
+
+	React.useEffect(() => {
+		if (!init) {
+			webSocket.socket.on('logs', data => {
+				console.log(data);
+			});
+			setInit(true);
+		}
+	}, [init]);
 
 	return (
 		<div className={clsx(classes.root, 'flex items-center')}>
