@@ -8,7 +8,7 @@ import { getInstansi } from './store/instansiSlice';
 const InfoInstansi = ({ instansi }) => (
 	<div className="p-16 flex flex-col">
 		<div className="flex flex-row">
-			<Typography className="h2">{instansi.nama || '-'}</Typography>
+			<Typography variant="h6">{instansi.nama || '-'}</Typography>
 		</div>
 		<Typography variant="subtitle2">NRI: {instansi.no}</Typography>
 	</div>

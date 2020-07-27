@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import reducer from './store';
 import { getListMesin } from './store/tableSlice';
 import MesinTable from './MesinTable';
+import MesinToolbar from './MesinToolbar';
+import MesinDialog from './MesinDialog';
 
 function Mesin() {
 	const dispatch = useDispatch();
@@ -21,12 +23,15 @@ function Mesin() {
 			{isLoading ? (
 				<div className="flex flex-col justify-center text-center items-center h-full">
 					<CircularProgress />
-					<Typography className="mt-8">Sedang melakukan sinkronisasi dengan mesin. . .</Typography>
+					<Typography className="mt-8">Tunggu sebentar. . .</Typography>
 				</div>
 			) : (
 				<>
-					<h2>List Mesin</h2>
-					{/* <MesinHeader /> */}
+					<MesinDialog />
+					<MesinToolbar />
+
+					<div className="my-8" />
+
 					<MesinTable />
 					{/* <MesinDialog /> */}
 				</>

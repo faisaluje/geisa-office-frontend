@@ -4,7 +4,7 @@ import FuseUtils from '@fuse/utils';
 import LoginConfig from 'app/main/login/LoginConfig';
 import DashboardConfig from 'app/main/dashboard/DashboardConfig';
 
-const routeConfigs = [DashboardConfig, LoginConfig];
+const routeConfigs = [LoginConfig, DashboardConfig];
 
 const routes = [
 	...FuseUtils.generateRoutesFromConfigs(routeConfigs),

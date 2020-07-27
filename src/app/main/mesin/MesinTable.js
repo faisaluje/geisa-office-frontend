@@ -4,6 +4,7 @@ import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import { Table, TableHead, TableRow, TableCell, TableBody, Typography, Tooltip } from '@material-ui/core';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 import webSocket from 'app/helpers/webSocket';
+import { openMesinDialog, setMesinFormData } from './store/formSlice';
 
 function MesinTable() {
 	const dispatch = useDispatch();
@@ -34,10 +35,10 @@ function MesinTable() {
 		}
 	}, [rows]);
 
-	// const clickDetail = mesin => {
-	// 	dispatch(setMesinForm(mesin));
-	// 	dispatch(openMesinDialog());
-	// };
+	const clickDetail = mesin => {
+		dispatch(setMesinFormData(mesin));
+		dispatch(openMesinDialog());
+	};
 
 	return (
 		<FuseScrollbars className="flex overflow-scroll">
@@ -81,12 +82,19 @@ function MesinTable() {
 										/>
 									</Tooltip>
 								</TableCell>
-								<TableCell>{mesin.sn}</TableCell>
 								<TableCell>
-									<Tooltip title={`${mesin.alias} (Klik untuk melihat detil)`}>
-										<Typography>{mesin.nama}</Typography>
+									<Tooltip title="Klik untuk melihat detil">
+										<Typography
+											className="text-blue hover:underline"
+											role="button"
+											onClick={() => clickDetail(mesin)}
+											color="inherit"
+										>
+											{mesin.sn}
+										</Typography>
 									</Tooltip>
 								</TableCell>
+								<TableCell>{mesin.nama}</TableCell>
 								<TableCell>{mesin.vendor}</TableCell>
 							</TableRow>
 						))

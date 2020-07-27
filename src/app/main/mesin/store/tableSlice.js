@@ -1,4 +1,4 @@
-const { createSlice } = require('@reduxjs/toolkit');
+import { createSlice } from '@reduxjs/toolkit';
 
 export const getListMesin = () => (dispatch, getState) => {
 	const instansi = getState().info.instansi?.data;
