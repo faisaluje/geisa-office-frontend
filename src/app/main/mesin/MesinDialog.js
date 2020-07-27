@@ -17,6 +17,7 @@ import { closeMesinDialog } from './store/formSlice';
 import reducer from './store';
 import MesinForm from './MesinForm';
 import Users from './users/Users';
+import Logs from './logs/Logs';
 
 function MesinDialog() {
 	const dispatch = useDispatch();
@@ -87,7 +88,8 @@ function MesinDialog() {
 					</Tabs>
 
 					<div className="overflow-hidden" style={{ height: 'calc(100vh - 390px)' }}>
-						<Users />
+						{selectedTab === 0 && <Users />}
+						{selectedTab === 1 && <Logs />}
 					</div>
 				</Paper>
 			</DialogContent>

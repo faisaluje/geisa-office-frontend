@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import UsersService from '../services/users.service';
 
-export const getListUsers = createAsyncThunk('mesin/users/getListsUsers', async (id, { getState }) => {
+export const getListUsers = createAsyncThunk('mesin/users/getListUsers', async (id, { getState }) => {
 	const { params } = getState().mesin.users;
 	const response = await UsersService.getListUsersData(id, params);
 	if (!response.success) {
@@ -24,7 +24,7 @@ const initialState = {
 	isLoading: false,
 	isError: false,
 	msg: '',
-	params: { page: 1, limit: 3 }
+	params: { page: 1 }
 };
 
 const usersSlice = createSlice({

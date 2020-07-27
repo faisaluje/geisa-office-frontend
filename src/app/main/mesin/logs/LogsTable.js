@@ -3,9 +3,11 @@ import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
+import LogsVia from './LogsVia';
 
-function UsersTable() {
-	const { table } = useSelector(({ mesin }) => mesin.users);
+function LogsTable() {
+	const { table } = useSelector(({ mesin }) => mesin.logs);
 	const [rows, setRows] = React.useState([]);
 
 	React.useEffect(() => {
@@ -20,25 +22,25 @@ function UsersTable() {
 				<Table stickyHeader size="small">
 					<TableHead>
 						<TableRow>
+							<TableCell className="text-14 font-bold">Tgl Kehadiran</TableCell>
 							<TableCell className="text-14 font-bold">User ID</TableCell>
-							<TableCell className="text-14 font-bold">Nama</TableCell>
-							<TableCell className="text-14 font-bold">Pegawai Dipilih</TableCell>
+							<TableCell className="text-14 font-bold">Via</TableCell>
 						</TableRow>
 					</TableHead>
 
 					<TableBody>
 						{rows.length > 0 ? (
-							rows.map(user => (
-								<TableRow key={user.id}>
-									<TableCell>{user.pin}</TableCell>
-									<TableCell>{user.name}</TableCell>
-									<TableCell>{user.name}</TableCell>
+							rows.map(log => (
+								<TableRow key={log.id}>
+									<TableCell>{moment(log.time).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+									<TableCell>{log.pin}</TableCell>
+									<TableCell>{LogsVia[log.verify]}</TableCell>
 								</TableRow>
 							))
 						) : (
 							<TableRow>
 								<TableCell colSpan={3} align="center">
-									Belum ada users. . .
+									Belum ada logs. . .
 								</TableCell>
 							</TableRow>
 						)}
@@ -49,4 +51,4 @@ function UsersTable() {
 	);
 }
 
-export default UsersTable;
+export default LogsTable;

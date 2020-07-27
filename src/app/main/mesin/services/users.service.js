@@ -1,5 +1,5 @@
-const { URL_API } = require('app/constants');
-const { default: Axios } = require('axios');
+import { URL_API } from 'app/constants';
+import Axios from 'axios';
 
 class UsersService {
 	static async getListUsersData(id, params) {
