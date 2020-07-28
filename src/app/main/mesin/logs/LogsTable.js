@@ -23,7 +23,7 @@ function LogsTable() {
 					<TableHead>
 						<TableRow>
 							<TableCell className="text-14 font-bold">Tgl Kehadiran</TableCell>
-							<TableCell className="text-14 font-bold">User ID</TableCell>
+							<TableCell className="text-14 font-bold">User</TableCell>
 							<TableCell className="text-14 font-bold">Via</TableCell>
 						</TableRow>
 					</TableHead>
@@ -33,7 +33,9 @@ function LogsTable() {
 							rows.map(log => (
 								<TableRow key={log.id}>
 									<TableCell>{moment(log.time).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-									<TableCell>{log.pin}</TableCell>
+									<TableCell>
+										{log.pin} - {log.user?.name}
+									</TableCell>
 									<TableCell>{LogsVia[log.verify]}</TableCell>
 								</TableRow>
 							))

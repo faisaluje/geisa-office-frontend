@@ -1,3 +1,5 @@
+import ErrorService from 'app/services/error.service';
+
 const { default: Axios } = require('axios');
 const { URL_API } = require('../../../constants');
 
@@ -13,6 +15,22 @@ class InstansiService {
 			return {
 				success: false,
 				msg: e.response?.message || e.message || 'Gagal mengambil data instansi'
+			};
+		}
+	}
+
+	static async updateInstansi(id, data) {
+		try {
+			delete data.createdAt;
+			delete data.updatedAt;
+
+			await Axios.patch(`${URL_API}/instansi/${id}`, data, { timeout: 30000 });
+
+			return { success: true, data: 'Berhasil update data' };
+		} catch (e) {
+			return {
+				success: false,
+				msg: ErrorService.getErrorMessage(e)
 			};
 		}
 	}
