@@ -13,7 +13,7 @@ const InfoInstansi = ({ instansi, onClickSetting }) => (
 				{instansi.nama || '-'}
 			</Typography>
 
-			<Tooltip arrow title="Pengaturan Instansi" className="flex">
+			<Tooltip arrow classes={{ tooltip: 'text-14' }} title="Pengaturan Instansi" className="flex">
 				<IconButton onClick={onClickSetting} size="small">
 					<Icon>settings</Icon>
 				</IconButton>

@@ -83,7 +83,7 @@ function MesinTable() {
 									</Tooltip>
 								</TableCell>
 								<TableCell>
-									<Tooltip title="Klik untuk melihat detil">
+									<Tooltip arrow classes={{ tooltip: 'text-14' }} title="Klik untuk melihat detil">
 										<Typography
 											className="text-blue hover:underline"
 											role="button"

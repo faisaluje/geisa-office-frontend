@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Icon } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { Button, Icon, Tooltip } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 import { refreshListUsers } from '../store/usersSlice';
 
 function UsersToolbar() {
 	const dispatch = useDispatch();
+	const { data } = useSelector(({ mesin }) => mesin.form);
 
 	return (
 		<div className="p-8 mr-0 w-full flex flex-wrap justify-between">
@@ -30,15 +31,28 @@ function UsersToolbar() {
 			</div>
 
 			<div className="flex flex-wrap items-center">
-				<Button
-					size="small"
-					variant="contained"
-					color="primary"
-					startIcon={<Icon>add</Icon>}
-					// onClick={() => dispatch(openPeriodeDialog())}
+				<Tooltip
+					arrow
+					classes={{ tooltip: 'text-14' }}
+					title={
+						data?.connectedMesin?.status === 'online'
+							? 'Klik untuk menambah user langsung ke mesin'
+							: 'Menambah user harus terhubung dengan mesin'
+					}
 				>
-					Tambah User
-				</Button>
+					<span>
+						<Button
+							size="small"
+							variant="contained"
+							color="primary"
+							disabled={data?.connectedMesin?.status === 'offline'}
+							startIcon={<Icon>add</Icon>}
+							// onClick={() => dispatch(openPeriodeDialog())}
+						>
+							Tambah User
+						</Button>
+					</span>
+				</Tooltip>
 			</div>
 		</div>
 	);

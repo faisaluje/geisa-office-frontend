@@ -1,7 +1,6 @@
+import { URL_API } from 'app/constants';
 import ErrorService from 'app/services/error.service';
-
-const { default: Axios } = require('axios');
-const { URL_API } = require('../../../constants');
+import Axios from 'axios';
 
 class InstansiService {
 	static async getInstansiData() {

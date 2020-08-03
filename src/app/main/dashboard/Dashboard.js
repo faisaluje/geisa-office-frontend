@@ -2,6 +2,7 @@ import React from 'react';
 import FuseAnimate from '@fuse/core/FuseAnimate';
 import Instansi from '../instansi/Instansi';
 import Mesin from '../mesin/Mesin';
+import Pegawai from '../pegawai/Pegawai';
 
 function Dashboard(props) {
 	// const { params } = props.match;
@@ -27,7 +28,7 @@ function Dashboard(props) {
 				</div>
 
 				<div className="flex lg:w-2/3 w-full" style={{ height: 'calc(100vh - 95px)' }}>
-					<h3>List Pegawai</h3>
+					<Pegawai />
 				</div>
 			</div>
 		</FuseAnimate>
