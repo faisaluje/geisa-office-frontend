@@ -71,7 +71,7 @@ function UsersTable() {
 							))
 						) : (
 							<TableRow>
-								<TableCell colSpan={3} align="center">
+								<TableCell colSpan={4} align="center">
 									Belum ada users. . .
 								</TableCell>
 							</TableRow>

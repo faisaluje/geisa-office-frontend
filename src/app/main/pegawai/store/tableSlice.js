@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
 import PegawaiService from '../services/pegawai.service';
 
 export const getListPegawai = createAsyncThunk('pegawai/getListPegawai', async (_id, { getState }) => {
@@ -20,7 +21,7 @@ const initialState = {
 	isLoading: true,
 	isError: false,
 	msg: '',
-	params: { page: 1 }
+	params: { page: 1, tgl: moment().format('YYYY-MM-DD') }
 };
 
 const tableSlice = createSlice({

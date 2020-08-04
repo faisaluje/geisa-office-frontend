@@ -1,13 +1,18 @@
 /* eslint-disable radix */
 import moment from 'moment';
-import { DialogContent, Typography } from '@material-ui/core';
+import { DialogContent, Icon, IconButton, Tooltip, Typography } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import { DatePicker } from '@material-ui/pickers';
 import MaterialTable from 'material-table';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LogsVia from '../mesin/logs/LogsVia';
-import { clearParamsListPegawaiLogs, getListPegawaiLogs, setParamsListPegawaiLogs } from './store/formSlice';
+import {
+	clearParamsListPegawaiLogs,
+	getListPegawaiLogs,
+	refreshListPegawaiLogs,
+	setParamsListPegawaiLogs
+} from './store/formSlice';
 
 function PegawaiLogs() {
 	const dispatch = useDispatch();
@@ -61,6 +66,12 @@ function PegawaiLogs() {
 					disableFuture
 					format="YYYY-MM-DD"
 				/>
+
+				<Tooltip arrow title="Refresh">
+					<IconButton size="small" onClick={() => dispatch(refreshListPegawaiLogs())}>
+						<Icon className="text-19 font-bold">refresh</Icon>
+					</IconButton>
+				</Tooltip>
 			</div>
 
 			{isError ? (
@@ -78,7 +89,7 @@ function PegawaiLogs() {
 					options={{
 						toolbar: false,
 						grouping: true,
-						maxBodyHeight: 395,
+						maxBodyHeight: 'calc(100vh - 365px)',
 						exportButton: true,
 						paging: false
 					}}

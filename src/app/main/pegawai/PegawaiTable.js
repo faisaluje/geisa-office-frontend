@@ -1,3 +1,4 @@
+import moment from 'moment';
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import {
 	CircularProgress,
@@ -123,8 +124,17 @@ function PegawaiTable() {
 									<TableCell>{pegawai.nip}</TableCell>
 									<TableCell>{pegawai.divisi?.nama}</TableCell>
 									<TableCell>{pegawai.jabatan?.nama}</TableCell>
-									<TableCell align="center">-</TableCell>
-									<TableCell align="center">-</TableCell>
+									<TableCell align="center">
+										{pegawai?.kehadiran?.masuk
+											? moment(pegawai.kehadiran.masuk).format('HH:mm')
+											: '-'}
+									</TableCell>
+									<TableCell align="center">
+										{pegawai?.kehadiran?.pulang &&
+										pegawai?.kehadiran?.masuk !== pegawai.kehadiran.pulang
+											? moment(pegawai.kehadiran.pulang).format('HH:mm')
+											: '-'}
+									</TableCell>
 								</TableRow>
 							))
 						)}

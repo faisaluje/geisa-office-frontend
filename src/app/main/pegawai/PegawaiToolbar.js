@@ -161,8 +161,8 @@ function PegawaiToolbar() {
 				<DatePicker
 					label="Tanggal Kehadiran"
 					size="small"
-					value={new Date()}
-					onChange={date => console.log(date.format('YYYY-MM-DD'))}
+					value={params?.tgl}
+					onChange={date => dispatch(setParamsListPegawai({ ...params, tgl: date.format('YYYY-MM-DD') }))}
 					disableFuture
 					format="YYYY-MM-DD"
 				/>

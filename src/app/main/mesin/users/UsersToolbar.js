@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Icon, Tooltip } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshListUsers } from '../store/usersSlice';
+import { openUserDialog, refreshListUsers } from '../store/usersSlice';
 
 function UsersToolbar() {
 	const dispatch = useDispatch();
@@ -47,7 +47,7 @@ function UsersToolbar() {
 							color="primary"
 							disabled={data?.connectedMesin?.status === 'offline'}
 							startIcon={<Icon>add</Icon>}
-							// onClick={() => dispatch(openPeriodeDialog())}
+							onClick={() => dispatch(openUserDialog())}
 						>
 							Tambah User
 						</Button>

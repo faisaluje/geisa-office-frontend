@@ -49,6 +49,8 @@ function PegawaiAutoComplete(props) {
 					variant={props.variant}
 					onChange={onTextChanged}
 					fullWidth
+					autoFocus
+					focused
 					inputProps={{
 						...params.inputProps,
 						className: 'text-black'
