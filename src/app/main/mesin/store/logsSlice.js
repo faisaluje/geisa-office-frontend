@@ -3,7 +3,7 @@ import LogsService from '../services/logs.service';
 
 export const getListLogs = createAsyncThunk('mesin/logs/getListLogs', async (sn, { getState }) => {
 	const { params } = getState().mesin.logs;
-	const response = await LogsService.getListLogsData(sn, params);
+	const response = await LogsService.getListLogsData({ ...params, sn });
 	if (!response.success) {
 		throw new Error(response.msg);
 	}

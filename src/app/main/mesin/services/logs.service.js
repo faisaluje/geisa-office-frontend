@@ -2,9 +2,9 @@ import { URL_API } from 'app/constants';
 import Axios from 'axios';
 
 class LogsService {
-	static async getListLogsData(sn, params) {
+	static async getListLogsData(params) {
 		try {
-			const { data } = await Axios.get(`${URL_API}/mesin-logs/${sn}`, {
+			const { data } = await Axios.get(`${URL_API}/mesin-logs`, {
 				params,
 				timeout: 30000
 			});

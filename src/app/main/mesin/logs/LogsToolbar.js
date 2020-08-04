@@ -19,18 +19,6 @@ function LogsToolbar() {
 	return (
 		<div className="p-8 mr-0 w-full flex flex-wrap justify-between">
 			<div className="flex flex-wrap items-center">
-				<UsersAutoComplete
-					variant="outlined"
-					className="min-w-224 p-0"
-					label="User"
-					size="small"
-					value={userSelected}
-					mesinId={dataMesin?.id}
-					onChange={(_evt, val) => onUserChange(val)}
-				/>
-
-				<div className="mx-8" />
-
 				<Button
 					size="small"
 					variant="contained"
@@ -40,6 +28,18 @@ function LogsToolbar() {
 				>
 					Refresh
 				</Button>
+
+				<div className="mx-8" />
+
+				<UsersAutoComplete
+					variant="outlined"
+					className="min-w-224 p-0"
+					label="User"
+					size="small"
+					value={userSelected}
+					mesinId={dataMesin?.id}
+					onChange={(_evt, val) => onUserChange(val)}
+				/>
 			</div>
 
 			<div className="flex flex-wrap items-center">
