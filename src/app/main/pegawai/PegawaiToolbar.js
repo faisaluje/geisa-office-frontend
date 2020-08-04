@@ -102,11 +102,10 @@ function PegawaiToolbar() {
 						<Tooltip classes={{ tooltip: 'text-14' }} arrow title="Klik untuk mencari">
 							<IconButton
 								size="small"
+								className="ml-8"
 								onClick={() => dispatch(setParamsListPegawai({ ...params, nama: txtCari, page: 1 }))}
 							>
-								<Icon className="ml-8" color="action">
-									search
-								</Icon>
+								<Icon color="action">search</Icon>
 							</IconButton>
 						</Tooltip>
 					</Container>

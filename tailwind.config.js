@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 module.exports = {
 	prefix: '',
-	important: false,
+	important: true,
 	separator: ':',
 	theme: {
 		screens: {

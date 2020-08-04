@@ -2,6 +2,7 @@ import { CircularProgress, Typography } from '@material-ui/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListUsers } from '../store/usersSlice';
+import UsersDialog from './UsersDialog';
 import UsersFooter from './UsersFooter';
 import UsersTable from './UsersTable';
 import UsersToolbar from './UsersToolbar';
@@ -28,6 +29,7 @@ function Users() {
 
 	return (
 		<>
+			<UsersDialog />
 			<UsersToolbar />
 			<UsersTable />
 			<UsersFooter />

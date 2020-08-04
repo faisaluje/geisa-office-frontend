@@ -2,15 +2,35 @@ import React from 'react';
 import { Button, Icon, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { DatePicker } from '@material-ui/pickers';
+import UsersAutoComplete from 'app/main/components/UsersAutoComplete';
 import { refreshListLogs, setParamsListLogs } from '../store/logsSlice';
 
 function LogsToolbar() {
 	const dispatch = useDispatch();
 	const { params } = useSelector(({ mesin }) => mesin.logs);
+	const { data: dataMesin } = useSelector(({ mesin }) => mesin.form);
+	const [userSelected, setUserSelected] = React.useState(null);
+
+	const onUserChange = user => {
+		setUserSelected(user);
+		dispatch(setParamsListLogs({ ...params, page: 1, pin: user?.pin || '' }));
+	};
 
 	return (
 		<div className="p-8 mr-0 w-full flex flex-wrap justify-between">
 			<div className="flex flex-wrap items-center">
+				<UsersAutoComplete
+					variant="outlined"
+					className="min-w-224 p-0"
+					label="User"
+					size="small"
+					value={userSelected}
+					mesinId={dataMesin?.id}
+					onChange={(_evt, val) => onUserChange(val)}
+				/>
+
+				<div className="mx-8" />
+
 				<Button
 					size="small"
 					variant="contained"

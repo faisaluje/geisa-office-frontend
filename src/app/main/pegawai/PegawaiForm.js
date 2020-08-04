@@ -8,6 +8,7 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
+	FormControlLabel,
 	Paper,
 	TextField,
 	Typography
@@ -15,9 +16,11 @@ import {
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { closeDialog, openDialog } from 'app/store/fuse/dialogSlice';
 import { showMessage } from 'app/store/fuse/messageSlice';
+import { startCase } from 'lodash';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DivisiAutoComplete from '../components/DivisiAutoComplete';
+import GreenSwitch from '../components/GreenSwitch';
 import JabatanAutoComplete from '../components/JabatanAutoComplete';
 import DivisiService from './services/divisi.service';
 import JabatanService from './services/jabatan.service';
@@ -216,6 +219,24 @@ function PegawaiForm() {
 								}}
 							/>
 						</div>
+
+						{data?.id && (
+							<div className="flex mb-16">
+								<Typography className="min-w-160 font-bold pt-12">Status:</Typography>
+
+								<FormControlLabel
+									control={
+										<GreenSwitch
+											checked={(form?.status || 'aktif') === 'aktif'}
+											onChange={() =>
+												setInForm('status', form?.status === 'aktif' ? 'tidak_aktif' : 'aktif')
+											}
+										/>
+									}
+									label={startCase(form?.status || 'Aktif')}
+								/>
+							</div>
+						)}
 					</FuseAnimateGroup>
 				</DialogContent>
 

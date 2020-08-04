@@ -70,6 +70,9 @@ function PegawaiTable() {
 								NIP
 							</TableCell>
 							<TableCell rowSpan={2} className="text-14 font-bold">
+								Divisi
+							</TableCell>
+							<TableCell rowSpan={2} className="text-14 font-bold">
 								Jabatan
 							</TableCell>
 							<TableCell colSpan={2} className="text-14 font-bold w-160" align="center">
@@ -89,7 +92,7 @@ function PegawaiTable() {
 					<TableBody>
 						{rows?.length < 1 ? (
 							<TableRow hover>
-								<TableCell colSpan="6" align="center">
+								<TableCell colSpan="7" align="center">
 									Pegawai tidak ditemukan. . .
 								</TableCell>
 							</TableRow>
@@ -97,7 +100,7 @@ function PegawaiTable() {
 							rows.map((pegawai, idx) => (
 								<TableRow hover key={idx}>
 									<TableCell>{idx + 1}</TableCell>
-									<TableCell className="flex flex-row">
+									<TableCell>
 										<Tooltip
 											arrow
 											classes={{ tooltip: 'text-14' }}
@@ -118,43 +121,7 @@ function PegawaiTable() {
 										</Tooltip>
 									</TableCell>
 									<TableCell>{pegawai.nip}</TableCell>
-									<TableCell>{pegawai.jabatan?.nama}</TableCell>
-									<TableCell align="center">-</TableCell>
-									<TableCell align="center">-</TableCell>
-								</TableRow>
-							))
-						)}
-						{rows?.length < 1 ? (
-							<TableRow hover>
-								<TableCell colSpan="6" align="center">
-									Pegawai tidak ditemukan. . .
-								</TableCell>
-							</TableRow>
-						) : (
-							rows.map((pegawai, idx) => (
-								<TableRow hover key={idx}>
-									<TableCell>{idx + 1}</TableCell>
-									<TableCell className="flex flex-row">
-										<Tooltip
-											arrow
-											classes={{ tooltip: 'text-14' }}
-											title="Klik untuk melihat detil Pegawai"
-										>
-											<Typography
-												className={
-													pegawai.mesinUsers?.length > 0
-														? 'text-blue hover:underline'
-														: 'text-grey hover:underline'
-												}
-												role="button"
-												onClick={() => onClickPegawai(pegawai)}
-												color="inherit"
-											>
-												{pegawai.nama}
-											</Typography>
-										</Tooltip>
-									</TableCell>
-									<TableCell>{pegawai.nip}</TableCell>
+									<TableCell>{pegawai.divisi?.nama}</TableCell>
 									<TableCell>{pegawai.jabatan?.nama}</TableCell>
 									<TableCell align="center">-</TableCell>
 									<TableCell align="center">-</TableCell>
