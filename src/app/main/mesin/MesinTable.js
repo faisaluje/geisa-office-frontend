@@ -4,6 +4,7 @@ import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import { Table, TableHead, TableRow, TableCell, TableBody, Typography, Tooltip } from '@material-ui/core';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 import webSocket from 'app/helpers/webSocket';
+import { sortBy } from 'lodash';
 import { openMesinDialog, setMesinFormData } from './store/formSlice';
 
 function MesinTable() {
@@ -13,7 +14,7 @@ function MesinTable() {
 
 	React.useEffect(() => {
 		if (data) {
-			setRows(data);
+			setRows(sortBy(data, ['tglRegistrasi']));
 		}
 	}, [data]);
 

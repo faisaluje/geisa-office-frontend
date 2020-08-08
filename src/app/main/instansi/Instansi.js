@@ -19,6 +19,10 @@ const InfoInstansi = ({ instansi, onClickSetting }) => (
 				</IconButton>
 			</Tooltip>
 		</div>
+		<Typography variant="subtitle1">
+			{instansi.wilayah?.nama}
+			{instansi.wilayah?.mstWilayah?.nama ? `, ${instansi.wilayah?.mstWilayah?.nama}` : ''}
+		</Typography>
 		<Typography variant="subtitle2">NRI: {instansi.no}</Typography>
 	</div>
 );

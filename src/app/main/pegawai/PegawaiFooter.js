@@ -9,11 +9,11 @@ function PegawaiFooter() {
 	const dispatch = useDispatch();
 	const { data, params, isLoading } = useSelector(({ pegawai }) => pegawai.table);
 
-	const handleChange = (_event, value) => {
+	const handleChange = (_event, page) => {
 		dispatch(
 			setParamsListPegawai({
 				...params,
-				page: value
+				page
 			})
 		);
 	};

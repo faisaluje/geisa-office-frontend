@@ -1,4 +1,4 @@
-import { AppBar, Dialog, Icon, IconButton, Paper, Tab, Tabs, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Dialog, Icon, IconButton, Tab, Tabs, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PegawaiForm from './PegawaiForm';
@@ -43,36 +43,38 @@ function PegawaiDialog() {
 				</Toolbar>
 			</AppBar>
 
-			<Paper elevation={5}>
-				<Tabs
-					value={selectedTab}
-					onChange={handleTabChange}
-					indicatorColor="secondary"
-					textColor="secondary"
-					variant="fullWidth"
-					scrollButtons="off"
-					classes={{
-						root: 'h-24 w-full bg-gray-100'
-					}}
-					centered
-				>
-					<Tab
+			<div>
+				{data?.id && (
+					<Tabs
+						value={selectedTab}
+						onChange={handleTabChange}
+						indicatorColor="secondary"
+						textColor="secondary"
+						variant="fullWidth"
+						scrollButtons="off"
 						classes={{
-							root: 'h-24 capitalize'
+							root: 'h-24 w-full bg-gray-100'
 						}}
-						label="Data Diri"
-					/>
-					<Tab
-						classes={{
-							root: 'h-24 capitalize'
-						}}
-						label="Logs Kehadiran"
-					/>
-				</Tabs>
+						centered
+					>
+						<Tab
+							classes={{
+								root: 'h-24 capitalize'
+							}}
+							label="Data Diri"
+						/>
+						<Tab
+							classes={{
+								root: 'h-24 capitalize'
+							}}
+							label="Logs Kehadiran"
+						/>
+					</Tabs>
+				)}
 
-				{selectedTab === 0 && <PegawaiForm />}
-				{selectedTab === 1 && <PegawaiLogs />}
-			</Paper>
+				{(selectedTab === 0 || !data?.id) && <PegawaiForm />}
+				{selectedTab === 1 && data?.id && <PegawaiLogs />}
+			</div>
 		</Dialog>
 	);
 }

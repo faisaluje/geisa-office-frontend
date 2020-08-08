@@ -15,6 +15,22 @@ const navigationConfig = [
 		icon: 'home',
 		url: '/home',
 		exact: false
+	},
+	{
+		id: 'pengaturan',
+		title: 'Pengaturan',
+		type: 'group',
+		icon: 'settings',
+		children: [
+			{
+				id: 'pengguna',
+				title: 'Pengguna',
+				type: 'item',
+				icon: 'supervisor_account',
+				url: '/pengaturan-pengguna',
+				exact: false
+			}
+		]
 	}
 ];
 
