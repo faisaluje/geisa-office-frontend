@@ -9,35 +9,35 @@ import MesinToolbar from './MesinToolbar';
 import MesinDialog from './MesinDialog';
 
 function Mesin() {
-	const dispatch = useDispatch();
-	const { isLoading, data: dataInstansi } = useSelector(({ info }) => info.instansi);
+  const dispatch = useDispatch();
+  const { isLoading, data: dataInstansi } = useSelector(({ info }) => info.instansi);
 
-	React.useEffect(() => {
-		if (!isLoading && dataInstansi) {
-			dispatch(getListMesin());
-		}
-	}, [dataInstansi, dispatch, isLoading]);
+  React.useEffect(() => {
+    if (!isLoading && dataInstansi) {
+      dispatch(getListMesin());
+    }
+  }, [dataInstansi, dispatch, isLoading]);
 
-	return (
-		<Paper className="flex flex-col w-full mb-16 sm:mb-0 p-16 rounded-8 border-1 sm:h-full overflow-hidden">
-			{isLoading ? (
-				<div className="flex flex-col justify-center text-center items-center h-full">
-					<CircularProgress />
-					<Typography className="mt-8">Tunggu sebentar. . .</Typography>
-				</div>
-			) : (
-				<>
-					<MesinDialog />
-					<MesinToolbar />
+  return (
+    <Paper className="flex flex-col w-full mb-16 sm:mb-0 p-16 rounded-8 border-1 sm:h-full overflow-hidden">
+      {isLoading ? (
+        <div className="flex flex-col justify-center text-center items-center h-full">
+          <CircularProgress />
+          <Typography className="mt-8">Tunggu sebentar. . .</Typography>
+        </div>
+      ) : (
+        <>
+          <MesinDialog />
+          <MesinToolbar />
 
-					<div className="my-8" />
+          <div className="my-8" />
 
-					<MesinTable />
-					{/* <MesinDialog /> */}
-				</>
-			)}
-		</Paper>
-	);
+          <MesinTable />
+          {/* <MesinDialog /> */}
+        </>
+      )}
+    </Paper>
+  );
 }
 
 export default withReducer('mesin', reducer)(Mesin);

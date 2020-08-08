@@ -22,7 +22,8 @@ import Formsy from 'formsy-react';
 import FuseAnimateGroup from '@fuse/core/FuseAnimateGroup';
 import { TextFieldFormsy } from '@fuse/core/formsy';
 import reducer from './store';
-import { closeProfileDialog, getProfile, saveProfile, setProfileForm } from './store/formSlice';
+import { closeProfileDialog, exitProfile, getProfile, saveProfile, setProfileForm } from './store/formSlice';
+import { refreshListPengguna } from '../pengguna/store/tableSlice';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -32,10 +33,14 @@ function Profile() {
   const [isFormValid, setIsFormValid] = React.useState(false);
 
   React.useEffect(() => {
-    if (!data) {
+    if (!data && props?.open) {
       dispatch(getProfile(user.id));
     }
-  }, [data, dispatch, user.id]);
+  }, [data, dispatch, props, user.id]);
+
+  React.useEffect(() => {
+    return () => dispatch(exitProfile());
+  }, [dispatch]);
 
   React.useEffect(() => {
     if (!isLoading && !isError && msg) {
@@ -51,6 +56,7 @@ function Profile() {
         })
       );
       dispatch(closeProfileDialog());
+      dispatch(refreshListPengguna());
     }
   }, [dispatch, isError, isLoading, msg]);
 

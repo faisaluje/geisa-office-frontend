@@ -3,83 +3,95 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import PenggunaService from '../services/pengguna.service';
 
 export const getListPengguna = createAsyncThunk('pengguna/getList', async (_id, { getState }) => {
-	const { params } = getState().pengguna.table;
-	const listPengguna = await PenggunaService.getListPenggunaData(params);
-	if (!listPengguna.success) {
-		throw new Error(listPengguna.msg);
-	}
+  const { params } = getState().pengguna.table;
+  const listPengguna = await PenggunaService.getListPenggunaData(params);
+  if (!listPengguna.success) {
+    throw new Error(listPengguna.msg);
+  }
 
-	return listPengguna.data;
+  return listPengguna.data;
 });
 
 export const updateStatusPengguna = createAsyncThunk('pengguna/updateStatus', async (data, { dispatch }) => {
-	const { id } = data;
-	delete data.id;
+  const { id } = data;
+  delete data.id;
 
-	const result = await PenggunaService.updatePengguna(id, data);
-	if (!result.success) {
-		throw new Error(result.msg);
-	}
+  const result = await PenggunaService.updatePengguna(id, data);
+  if (!result.success) {
+    throw new Error(result.msg);
+  }
 
-	dispatch(refreshListPengguna());
+  dispatch(refreshListPengguna());
 });
 
-export const refreshListPengguna = () => dispatch => {
-	dispatch(getListPengguna());
-};
-
 const initialState = {
-	data: null,
-	isLoading: false,
-	isError: false,
-	msg: '',
-	params: { page: 1 },
-	props: { open: false }
+  data: null,
+  isLoading: false,
+  isError: false,
+  isRefresh: true,
+  msg: '',
+  params: { page: 1 },
+  props: { open: false }
 };
 
 const tableSlice = createSlice({
-	name: 'table',
-	initialState,
-	reducers: {
-		setParamsListPengguna: (state, action) => {
-			state.params = action.payload;
-		},
-		openListPenggunaDialog: state => {
-			state.props.open = true;
-		},
-		closeListPenggunaDialog: state => {
-			state.props.open = false;
-			History.push('/home');
-		}
-	},
-	extraReducers: {
-		[getListPengguna.pending]: state => {
-			state.isLoading = true;
-			state.isError = false;
-			state.msg = '';
-		},
-		[getListPengguna.fulfilled]: (state, action) => {
-			state.data = action.payload;
-			state.isLoading = false;
-		},
-		[getListPengguna.rejected]: (state, action) => {
-			state.isError = true;
-			state.msg = action.error.message || 'something wrong';
-			state.isLoading = false;
-		},
-		[updateStatusPengguna.pending]: state => {
-			state.isLoading = true;
-			state.isError = false;
-			state.msg = '';
-		},
-		[updateStatusPengguna.rejected]: (state, action) => {
-			state.isError = true;
-			state.msg = action.error.message || 'something wrong';
-			state.isLoading = false;
-		}
-	}
+  name: 'table',
+  initialState,
+  reducers: {
+    setParamsListPengguna: (state, action) => {
+      state.params = action.payload;
+      state.isRefresh = true;
+    },
+    refreshListPengguna: state => {
+      state.isRefresh = true;
+    },
+    openListPenggunaDialog: state => {
+      state.props.open = true;
+    },
+    closeListPenggunaDialog: state => {
+      state.props.open = false;
+      History.push('/home');
+    },
+    exitListPengguna: state => {
+      state.isRefresh = true;
+      state.params = { page: 1 };
+    }
+  },
+  extraReducers: {
+    [getListPengguna.pending]: state => {
+      state.isRefresh = false;
+      state.isLoading = true;
+      state.isError = false;
+      state.msg = '';
+    },
+    [getListPengguna.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.isLoading = false;
+    },
+    [getListPengguna.rejected]: (state, action) => {
+      state.isError = true;
+      state.msg = action.error.message || 'something wrong';
+      state.isLoading = false;
+    },
+    [updateStatusPengguna.pending]: state => {
+      state.isLoading = true;
+      state.isError = false;
+      state.msg = '';
+    },
+    [updateStatusPengguna.rejected]: (state, action) => {
+      state.isError = true;
+      state.msg = action.error.message || 'something wrong';
+      state.isLoading = false;
+    }
+  }
 });
 
-export const { setParamsListPengguna, openListPenggunaDialog, closeListPenggunaDialog } = tableSlice.actions;
+export const {
+  setParamsListPengguna,
+  openListPenggunaDialog,
+  closeListPenggunaDialog,
+  refreshListPengguna,
+  exitListPengguna
+} = tableSlice.actions;
 
 export default tableSlice.reducer;

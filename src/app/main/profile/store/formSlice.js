@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import PenggunaService from 'app/main/pengguna/services/pengguna.service';
+import { refreshListPengguna } from 'app/main/pengguna/store/tableSlice';
 
 export const getProfile = createAsyncThunk('profile/get', async id => {
   const profile = await PenggunaService.getPenggunaById(id);
@@ -11,13 +12,14 @@ export const getProfile = createAsyncThunk('profile/get', async id => {
   return profile.data;
 });
 
-export const saveProfile = createAsyncThunk('profile/save', async ({ id, data }) => {
+export const saveProfile = createAsyncThunk('profile/save', async ({ id, data }, { dispatch }) => {
   const result = await PenggunaService.updatePengguna(id, data);
 
   if (!result.success) {
     throw new Error(result.msg);
   }
 
+  dispatch(refreshListPengguna());
   return result.data;
 });
 
@@ -43,7 +45,9 @@ const formSlice = createSlice({
       state.props.open = false;
       state.isError = false;
       state.msg = '';
-      state.data = null;
+    },
+    exitProfile: state => {
+      state.data = '';
     }
   },
   extraReducers: {
@@ -78,6 +82,6 @@ const formSlice = createSlice({
   }
 });
 
-export const { setProfileForm, openProfileDialog, closeProfileDialog } = formSlice.actions;
+export const { setProfileForm, openProfileDialog, closeProfileDialog, exitProfile } = formSlice.actions;
 
 export default formSlice.reducer;

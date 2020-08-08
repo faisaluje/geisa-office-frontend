@@ -8,33 +8,33 @@ import UsersTable from './UsersTable';
 import UsersToolbar from './UsersToolbar';
 
 function Users() {
-	const dispatch = useDispatch();
-	const { data: dataMesin } = useSelector(({ mesin }) => mesin.form);
-	const { isLoading, params } = useSelector(({ mesin }) => mesin.users);
+  const dispatch = useDispatch();
+  const { data: dataMesin } = useSelector(({ mesin }) => mesin.form);
+  const { isLoading, params, isRefresh } = useSelector(({ mesin }) => mesin.users);
 
-	React.useEffect(() => {
-		if (dataMesin && params) {
-			dispatch(getListUsers(dataMesin?.id));
-		}
-	}, [dataMesin, dispatch, params]);
+  React.useEffect(() => {
+    if (dataMesin && params && isRefresh) {
+      dispatch(getListUsers(dataMesin?.id));
+    }
+  }, [dataMesin, dispatch, isRefresh, params]);
 
-	if (isLoading) {
-		return (
-			<div className="flex flex-col justify-center text-center items-center h-full">
-				<CircularProgress />
-				<Typography className="mt-8">Tunggu sebentar. . .</Typography>
-			</div>
-		);
-	}
+  if (isLoading) {
+    return (
+      <div className="flex flex-col justify-center text-center items-center h-full">
+        <CircularProgress />
+        <Typography className="mt-8">Tunggu sebentar. . .</Typography>
+      </div>
+    );
+  }
 
-	return (
-		<>
-			<UsersDialog />
-			<UsersToolbar />
-			<UsersTable />
-			<UsersFooter />
-		</>
-	);
+  return (
+    <>
+      <UsersDialog />
+      <UsersToolbar />
+      <UsersTable />
+      <UsersFooter />
+    </>
+  );
 }
 
 export default Users;
