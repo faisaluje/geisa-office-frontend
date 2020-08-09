@@ -72,7 +72,7 @@ function InstansiLogo(props) {
       >
         <input accept="image/*" className="hidden" id="button-file" type="file" onChange={handleUploadChange} />
         <img
-          className="max-w-none w-auto h-full px-12"
+          className="max-w-none w-auto h-full px-32 py-16"
           src={`${URL_BACKEND}/logos/${data.id}.jpg?${new Date().getTime()}`}
           alt="profile"
           onError={e => {

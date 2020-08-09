@@ -27,6 +27,7 @@ const tableSlice = createSlice({
   reducers: {
     setParamsListPegawai: (state, action) => {
       state.params = action.payload;
+      state.isRefresh = true;
     },
     refreshListPegawai: state => {
       state.isRefresh = true;
