@@ -23,7 +23,7 @@ import FuseAnimateGroup from '@fuse/core/FuseAnimateGroup';
 import { TextFieldFormsy } from '@fuse/core/formsy';
 import reducer from './store';
 import { closeProfileDialog, exitProfile, getProfile, saveProfile, setProfileForm } from './store/formSlice';
-import { refreshListPengguna } from '../pengguna/store/tableSlice';
+import { refreshListPengguna } from '../pengaturan/pengguna/store/tableSlice';
 
 function Profile() {
   const dispatch = useDispatch();

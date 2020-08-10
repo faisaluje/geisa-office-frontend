@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import PenggunaService from 'app/main/pengguna/services/pengguna.service';
-import { refreshListPengguna } from 'app/main/pengguna/store/tableSlice';
+import PenggunaService from 'app/main/pengaturan/pengguna/services/pengguna.service';
+import { refreshListPengguna } from 'app/main/pengaturan/pengguna/store/tableSlice';
 
 export const getProfile = createAsyncThunk('profile/get', async id => {
   const profile = await PenggunaService.getPenggunaById(id);

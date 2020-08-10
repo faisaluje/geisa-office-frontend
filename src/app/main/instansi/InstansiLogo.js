@@ -70,7 +70,13 @@ function InstansiLogo(props) {
           'flex items-center justify-center relative h-128 rounded-4 m-8 overflow-hidden cursor-pointer hover:shadow-5'
         )}
       >
-        <input accept="image/*" className="hidden" id="button-file" type="file" onChange={handleUploadChange} />
+        <input
+          accept=".gif, .jpg, .png, .jpeg"
+          className="hidden"
+          id="button-file"
+          type="file"
+          onChange={handleUploadChange}
+        />
         <img
           className="max-w-none w-auto h-full px-32 py-16"
           src={`${URL_BACKEND}/logos/${data.id}.jpg?${new Date().getTime()}`}

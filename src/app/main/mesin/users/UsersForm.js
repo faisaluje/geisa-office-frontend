@@ -101,7 +101,7 @@ function UsersForm() {
             </div>
           )}
 
-          <div className="flex mb-24">
+          <div className="flex mb-24 items-center">
             <Typography className="min-w-136 font-bold pt-12">Pegawai Yang Dipilih:</Typography>
 
             <PegawaiAutoComplete className="w-full" value={form?.pegawai || null} onChange={handleChangePegawai} />

@@ -17,7 +17,7 @@ import { showMessage } from 'app/store/fuse/messageSlice';
 import Formsy from 'formsy-react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProfileForm } from '../profile/store/formSlice';
+import { setProfileForm } from '../../profile/store/formSlice';
 import { closePenggunaDialog, savePengguna, setPenggunaForm } from './store/formSlice';
 
 function PenggunaForm() {

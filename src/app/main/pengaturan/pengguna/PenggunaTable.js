@@ -19,7 +19,7 @@ import React from 'react';
 import { startCase } from 'lodash';
 import { closeDialog, openDialog } from 'app/store/fuse/dialogSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import GreenSwitch from '../components/GreenSwitch';
+import GreenSwitch from '../../components/GreenSwitch';
 import { updateStatusPengguna } from './store/tableSlice';
 import { openPenggunaDialog, setPenggunaForm } from './store/formSlice';
 

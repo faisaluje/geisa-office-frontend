@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import PenggunaService from 'app/main/pengguna/services/pengguna.service';
+import PenggunaService from 'app/main/pengaturan/pengguna/services/pengguna.service';
 
 export const savePassword = createAsyncThunk('password/save', async ({ id, data }) => {
   const result = await PenggunaService.updatePassword(id, data);
