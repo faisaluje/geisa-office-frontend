@@ -39,7 +39,15 @@ function KehadiranByPegawai() {
   };
 
   return (
-    <Dialog open={props.open} TransitionComponent={Transition} onClose={handleClose} fullScreen fullWidth hideBackdrop>
+    <Dialog
+      open={props.open}
+      TransitionComponent={Transition}
+      onClose={handleClose}
+      fullScreen
+      fullWidth
+      hideBackdrop
+      className="print:m-0 print:m-0"
+    >
       <DialogTitle className="p-0 print:hidden">
         <AppBar className="relative">
           <Toolbar>
@@ -54,7 +62,7 @@ function KehadiranByPegawai() {
         </AppBar>
       </DialogTitle>
 
-      <DialogContent className="flex flex-col w-full m-0">
+      <DialogContent className="flex flex-col w-full m-0 print:p-0 print:m-0">
         {isLoading ? (
           <div className="flex flex-col justify-center text-center items-center h-full">
             <CircularProgress />

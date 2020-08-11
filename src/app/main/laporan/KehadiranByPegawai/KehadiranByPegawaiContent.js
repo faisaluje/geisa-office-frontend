@@ -1,4 +1,6 @@
 import { Paper, Typography } from '@material-ui/core';
+import FooterLaporan from 'app/main/components/FooterLaporan';
+import HeaderLaporan from 'app/main/components/HeaderLaporan';
 import moment from 'moment';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -17,8 +19,10 @@ function KehadiranByPegawaiContent() {
   return (
     <Paper
       elevation={3}
-      className="flex flex-col flex-auto w-xl mx-auto print:bg-white print:w-full print:h-full mt-24 print:m-0 print:mt-4 print:shadow-none p-24 print:p-0"
+      className="flex flex-col flex-auto w-xl mx-auto print:bg-white print:w-full print:h-full mt-24 print:m-0 print:shadow-none p-24 print:p-0"
     >
+      <HeaderLaporan title={`Kehadiran Pegawai Bulan ${moment(params.tglAwal).format('MMMM YYYY')}`} />
+
       <div className="my-12" />
 
       <div className="flex flex-col">
@@ -72,6 +76,8 @@ function KehadiranByPegawaiContent() {
           })}
         </tbody>
       </table>
+
+      <FooterLaporan />
     </Paper>
   );
 }
