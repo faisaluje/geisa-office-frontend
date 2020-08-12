@@ -17,6 +17,22 @@ class LogsService {
       };
     }
   }
+
+  static async getListLogsAll(params) {
+    try {
+      const { data } = await Axios.get(`${URL_API}/mesin-logs/kehadiran`, {
+        params,
+        timeout: 30000
+      });
+
+      return { success: true, data };
+    } catch (e) {
+      return {
+        success: false,
+        msg: e.response?.message || e.message || 'Gagal mengambil data logs'
+      };
+    }
+  }
 }
 
 export default LogsService;

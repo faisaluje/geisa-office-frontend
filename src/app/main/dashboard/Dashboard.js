@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import History from '@history';
+import webSocket from 'app/helpers/webSocket';
 import Instansi from '../instansi/Instansi';
 import Mesin from '../mesin/Mesin';
 import Pegawai from '../pegawai/Pegawai';
@@ -12,14 +13,27 @@ import { openTentangDialog } from '../bantuan/store/tentangSlice';
 import Tentang from '../bantuan/Tentang';
 import KehadiranByPegawai from '../laporan/KehadiranByPegawai/KehadiranByPegawai';
 import { openKehadiranByPegawaigDialog } from '../laporan/store/kehadiranByPegawaiSlice';
+import { refreshListPegawai } from '../pegawai/store/tableSlice';
+import { refreshListLogs } from '../mesin/store/logsSlice';
+import { openKehadiranByBulangDialog } from '../laporan/store/kehadiranByBulanSlice';
+import KehadiranByBulan from '../laporan/kehadiranByBulan/KehadiranByBulan';
 
 function Dashboard(props) {
   const dispatch = useDispatch();
   const { params } = props.match;
+  const [init, setInit] = React.useState(false);
 
-  // React.useEffect(() => {
-  // 	dispatch(getAllPengaturan());
-  // }, [dispatch]);
+  React.useEffect(() => {
+    if (!init) {
+      webSocket.socket.on('logs', data => {
+        console.log(data);
+        dispatch(refreshListPegawai());
+        dispatch(refreshListLogs());
+      });
+      setInit(true);
+    }
+  }, [dispatch, init]);
+
   React.useEffect(() => {
     if (params.menu === 'pengaturan-pengguna') {
       dispatch(openListPenggunaDialog());
@@ -34,6 +48,10 @@ function Dashboard(props) {
       window.open('https://api.whatsapp.com/send?phone=+6287877991915');
     }
 
+    if (params.menu === 'kehadiran-bulan') {
+      dispatch(openKehadiranByBulangDialog());
+    }
+
     if (params.menu === 'kehadiran-pegawai') {
       dispatch(openKehadiranByPegawaigDialog());
     }
@@ -45,6 +63,7 @@ function Dashboard(props) {
       <Profile />
       <ChangePassword />
       <Tentang />
+      <KehadiranByBulan />
       <KehadiranByPegawai />
 
       <div className="flex flex-1 flex-col lg:mr-16 lg:w-1/3 w-full" style={{ height: 'calc(100vh - 95px)' }}>

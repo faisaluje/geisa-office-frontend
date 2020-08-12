@@ -21,7 +21,10 @@ function KehadiranByPegawaiContent() {
       elevation={3}
       className="flex flex-col flex-auto w-xl mx-auto print:bg-white print:w-full print:h-full mt-24 print:m-0 print:shadow-none p-24 print:p-0"
     >
-      <HeaderLaporan title={`Kehadiran Pegawai Bulan ${moment(params.tglAwal).format('MMMM YYYY')}`} />
+      <HeaderLaporan
+        title="Laporan Kehadiran Pegawai"
+        subTitle={`Bulan ${moment(params.tglAwal).format('MMMM YYYY')}`}
+      />
 
       <div className="my-12" />
 
@@ -31,17 +34,17 @@ function KehadiranByPegawaiContent() {
           <Typography>: {params.pegawai.nama}</Typography>
         </div>
 
-        <div className="flex mt-12">
+        <div className="flex mt-2">
           <Typography className="w-160 min-w-160">NIP</Typography>
           <Typography>: {params.pegawai.nip}</Typography>
         </div>
 
-        <div className="flex mt-12">
+        <div className="flex mt-2">
           <Typography className="w-160 min-w-160">Divisi</Typography>
           <Typography>: {params.pegawai.divisi?.nama || '-'}</Typography>
         </div>
 
-        <div className="flex mt-12">
+        <div className="flex mt-2">
           <Typography className="w-160 min-w-160">Jabatan</Typography>
           <Typography>: {params.pegawai.jabatan?.nama || '-'}</Typography>
         </div>
@@ -50,26 +53,51 @@ function KehadiranByPegawaiContent() {
       <table className="border-collapse border-black border mt-12">
         <thead>
           <tr>
-            <th className="p-4 border w-80">Tanggal</th>
-            <th className="p-4 border">Masuk</th>
-            <th className="p-4 border">Pulang</th>
+            <th className="p-2 border w-80">Tanggal</th>
+            <th className="p-2 border">Hari</th>
+            <th className="p-2 border">Masuk</th>
+            <th className="p-2 border">Pulang</th>
+            <th className="p-2 border">Durasi</th>
           </tr>
         </thead>
 
         <tbody>
           {[...Array(moment(params.tglAkhir).date())].map((_val, idx) => {
             const kehadiran = data ? data.find(row => row.tgl === idx + 1) : undefined;
+            let durasi = '';
+
+            if (kehadiran) {
+              const pulang = moment(kehadiran.pulang.time);
+              const masuk = moment(kehadiran.masuk.time);
+              const duration = moment.duration(pulang.diff(masuk));
+              if (duration.hours()) {
+                durasi += `${duration.hours()} Jam`;
+              }
+
+              if (duration.minutes()) {
+                durasi += duration.hours() ? ' ' : '';
+                durasi += `${duration.minutes()} Menit`;
+              }
+            }
 
             return (
-              <tr key={idx}>
-                <td className="p-4 border-r border-l border-black" align="center">
+              <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
+                <td className="p-2 border-r border-l border-black" align="center">
                   {idx + 1}
                 </td>
-                <td className="p-4 border-r border-black" align="center">
+                <td className="p-2 border-r border-black" align="center">
+                  {moment(params.tglAkhir)
+                    .date(idx + 1)
+                    .format('dddd')}
+                </td>
+                <td className="p-2 border-r border-black" align="center">
                   {kehadiran ? moment(kehadiran.masuk.time).format('HH:mm') : '-'}
                 </td>
-                <td className="p-4 border-r border-black" align="center">
+                <td className="p-2 border-r border-black" align="center">
                   {kehadiran ? moment(kehadiran.pulang.time).format('HH:mm') : '-'}
+                </td>
+                <td className="p-2 border-r border-black" align="center">
+                  {durasi || '-'}
                 </td>
               </tr>
             );

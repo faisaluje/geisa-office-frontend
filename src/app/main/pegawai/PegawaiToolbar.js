@@ -47,7 +47,6 @@ function PegawaiToolbar() {
 
   const changeParams = values => {
     dispatch(setParamsListPegawai(values));
-    dispatch(refreshListPegawai());
   };
 
   return (

@@ -16,6 +16,7 @@
     height: auto !important;
     overflow: initial !important;
     background: none;
+    -webkit-print-color-adjust: exact;
   }
 
   /* Page breaks */

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import kehadiranByPegawai from './kehadiranByPegawaiSlice';
+import kehadiranByBulan from './kehadiranByBulanSlice';
 
 const reducer = combineReducers({
-  kehadiranByPegawai
+  kehadiranByPegawai,
+  kehadiranByBulan
 });
 
 export default reducer;

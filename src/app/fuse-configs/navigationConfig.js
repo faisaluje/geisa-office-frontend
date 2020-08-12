@@ -16,11 +16,11 @@ const navigationConfig = [
     icon: 'description',
     children: [
       {
-        id: 'kehadiran-tanggal',
-        title: 'Kehadiran By Tanggal',
+        id: 'kehadiran-bulan',
+        title: 'Kehadiran By Bulan',
         type: 'item',
         icon: 'date_range',
-        url: '/kehadiran-tanggal',
+        url: '/kehadiran-bulan',
         exact: false
       },
       {
