@@ -45,7 +45,7 @@ function KehadiranByBulanContent() {
           </tr>
         </thead>
       </table>
-      <table className="border-collapse border-black border border-b-0">
+      <table className="border-collapse border-black border border-t-0">
         <thead>
           <tr>
             <th className="p-2 border w-52">No</th>
@@ -86,7 +86,7 @@ function KehadiranByBulanContent() {
           </tr>
         </thead>
       </table>
-      <table className="border-collapse border-black border border-b-0">
+      <table className="border-collapse border-black border border-t-0">
         <thead>
           <tr>
             <th className="p-2 border w-52">No</th>
